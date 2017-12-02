@@ -2,6 +2,7 @@
 #include "../drivers/screen.h"
 #include "kernel.h"
 #include "../libc/string.h"
+#include "shell.h"
 
 void main() {
     isr_install();
@@ -22,5 +23,9 @@ void user_input(char *input, int scancode) {
     char sc[32];
     int_to_ascii(scancode, sc);
     kprint(sc);
+    kprint("\n");
+    if (scancode == 28) { //Enter key
+        whichWord(input);
+    }
     kprint("\n> ");
 }

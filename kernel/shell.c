@@ -1,13 +1,14 @@
 #include "shell.h"
+#include "../libc/string.h"
+#include "../drivers/screen.h"
 #define TABLE_LENGTH 4
 
 void aaFunc();
 void bbFunc();
 void ccFunc();
 
-char * keyWordTable[MAX_TABLE_LENGTH] = {"aa","bb","cc","0"};
-int (*funcs[3]) = {aaFunc, bbFunc, ccFunc};
-int *null = keyWordTable + 3;
+char * keyWordTable[TABLE_LENGTH] = {"aa","bb","cc","0"};
+void (*funcs[3])() = {&aaFunc, &bbFunc, &ccFunc};
 
 /*
 void addKeyWords(){
@@ -20,27 +21,28 @@ void addKeyWords(){
 
 void whichWord(char str[]){
 	int wordIndex;
-	wordIndex = searchKeyWord(str,MAX_TABLE_LENGTH,0,4);
+	wordIndex = searchKeyWord(str,0,4);
 	funcs[wordIndex]();
 }
 
 int searchKeyWord(char str[], int firstIndex, int lastIndex){
-	if(first > last){
-		return null;
+	if(firstIndex > lastIndex){
+		return 0;
 	}
 	char *p;
-	p = keyWordTable;
+	p = keyWordTable[0];
 	char *mid;
 	mid = p+((firstIndex+lastIndex)/2);
-	if(strcmp(*str, *mid) == 0 ){
+	if(strcmp(str, mid) == 0 ){
 		return mid - p;
 	}
-	else if(strcmp(*str, *mid) > 0 ){
-		return findKeyWord(str,mid-p,lastIndex);
+	else if(strcmp(str, mid) > 0 ){
+		return searchKeyWord(str,mid-p,lastIndex);
 	}
 	else{
-		return findKeyWord(str,first,mid-p);
+		return searchKeyWord(str,firstIndex,mid-p);
 	}
+	return 0;
 }
 void aaFunc(){
 	kprint("aaFunc");
