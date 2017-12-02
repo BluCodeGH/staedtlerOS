@@ -28,7 +28,13 @@ static void keyboard_callback(registers_t regs) {
     /* The PIC leaves us the scancode in port 0x60 */
     u8 scancode = port_byte_in(0x60);
     
-    if (scancode > SC_MAX) return;
+    if (scancode > SC_MAX) {
+        char scancode_ascii[256];
+        int_to_ascii((int)scancode, scancode_ascii);
+        kprint("Got unknown scancode: ");
+        kprint(scancode_ascii);
+        return;
+    };
     if (scancode == BACKSPACE) {
         backspace(key_buffer);
         kprint_backspace();
