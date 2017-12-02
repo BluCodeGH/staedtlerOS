@@ -21,10 +21,17 @@ void addKeyWords(){
 
 void whichWord(char str[]){
 	int wordIndex;
-	wordIndex = searchKeyWord(str,0,4);
-	funcs[wordIndex]();
+	//wordIndex = searchKeyWord(str,0,4);
+	int i = 0;
+	for(i;i<TABLE_LENGTH;i++){
+		if(strcmp(keyWordTable[i],str)==0){
+			funcs[wordIndex]();
+			break;
+		}
+	}
 }
 
+/*
 int searchKeyWord(char str[], int firstIndex, int lastIndex){
 	if(firstIndex > lastIndex){
 		return 0;
@@ -44,6 +51,7 @@ int searchKeyWord(char str[], int firstIndex, int lastIndex){
 	}
 	return 0;
 }
+*/
 void aaFunc(){
 	kprint("aaFunc");
 }
