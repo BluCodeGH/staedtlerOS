@@ -14,7 +14,6 @@ void main() {
 
 void user_input(char *input, int scancode) {
     if (scancode == 28) { //Enter key
-        kprint("\n");
         whichWord(input);
     }
     kprint("\n> ");

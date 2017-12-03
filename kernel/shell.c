@@ -78,12 +78,13 @@ void whichWord(char str[]){
 		int found = 0;
     for(int i = 0;i<N_COMMANDS;i++) {
         if(strcmp(names[i],cmd)==0) {
+        		kprint("\n");
             funcs[i](args);
             found = 1;
             break;
         }
     }
     if (found == 0 && strcmp(cmd, "") != 0) {
-    	kprint("Err: Command not found. Type HELP for help.");
+    	kprint("\nErr: Command not found. Type HELP for help.");
     }
 }
