@@ -7,6 +7,7 @@
 void main() {
     isr_install();
     irq_install();
+    setupShell();
 
     kprint("Type something, it will go through the kernel\n"
         "Type END to halt the CPU\n> ");
@@ -17,14 +18,8 @@ void user_input(char *input, int scancode) {
         kprint("Stopping the CPU. Bye!\n");
         asm volatile("hlt");
     }
-    kprint("You said: ");
-    kprint(input);
-    kprint(" with scancode: ");
-    char sc[32];
-    int_to_ascii(scancode, sc);
-    kprint(sc);
-    kprint("\n");
     if (scancode == 28) { //Enter key
+        kprint("\n");
         whichWord(input);
     }
     kprint("\n> ");

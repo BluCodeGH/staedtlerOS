@@ -27,6 +27,14 @@ void reverse(char s[]) {
     }
 }
 
+void strreplace(char s[], char *des) {
+    while (*s != '\0') {
+        *des = *s;
+        s += 1;
+        des += 1;
+    }
+}
+
 /* K&R */
 int strlen(char s[]) {
     int i = 0;
