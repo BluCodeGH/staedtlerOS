@@ -17,6 +17,17 @@ void int_to_ascii(int n, char str[]) {
     reverse(str);
 }
 
+int ascii_to_int(char str[]){
+    *p = str;
+    int total = 0;
+    while((*p) != '\0' ){
+        total = total*10;
+        total += (int) (*p);
+        p++;
+    }
+    return total;
+}
+
 /* K&R */
 void reverse(char s[]) {
     int c, i, j;
