@@ -7,7 +7,6 @@
 void main() {
     isr_install();
     irq_install();
-    setupShell();
 
     kprint("Type something, it will go through the kernel\n"
         "Type END to halt the CPU\n> ");

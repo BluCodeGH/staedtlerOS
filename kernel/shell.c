@@ -4,6 +4,8 @@
 #include "../libc/mem.h"
 #include "../libc/function.h"
 
+#define N_COMMANDS 3
+
 void aaFunc(){
 	kprint("aaFunc");
 }
@@ -23,18 +25,14 @@ void addKeyWords(){
 }
 */
 
-void setupShell(void) {
-	//commands.names[0] = &("AA");
-	strreplace("AA", commands.names[0]);
-	commands.funcs[0] = &aaFunc;
-}
-
 void whichWord(char str[]){
+		char names[N_COMMANDS][16] = {"AA", "BB", "CC"};
+		void (*funcs[N_COMMANDS])() = {&aaFunc, &bbFunc, &ccFunc};
     //int wordIndex;
     //wordIndex = searchKeyWord(str,0,4);
     for(int i = 0;i<256;i++){
-        if(strcmp(commands.names[i],str)==0){
-            commands.funcs[i]();
+        if(strcmp(names[i],str)==0){
+            funcs[i]();
             break;
         }
     }
