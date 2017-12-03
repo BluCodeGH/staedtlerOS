@@ -18,12 +18,11 @@ void int_to_ascii(int n, char str[]) {
 }
 
 int ascii_to_int(char str[]){
-    *p = str;
     int total = 0;
-    while((*p) != '\0' ){
+    while(*str != '\0' ){
         total = total*10;
-        total += (int) (*p);
-        p++;
+        total += (int)*str - (int)('0');
+        str++;
     }
     return total;
 }

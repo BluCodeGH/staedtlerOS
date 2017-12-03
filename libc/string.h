@@ -8,6 +8,6 @@ void backspace(char s[]);
 void append(char s[], char n);
 int strcmp(char s1[], char s2[]);
 void strreplace(char s[], char *des);
-int ascii_to_int(char str[])
+int ascii_to_int(char str[]);
 
 #endif

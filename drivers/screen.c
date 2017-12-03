@@ -14,6 +14,8 @@ int get_offset_col(int offset);
  * Public Kernel API functions                            *
  **********************************************************/
 
+unsigned char colorData = WHITE_ON_BLACK;
+
 /**
  * Print a message on the specified location
  * If col, row, are negative, we will use the current offset
@@ -32,7 +34,7 @@ void kprint_at(char *message, int col, int row) {
     /* Loop through message and print it */
     int i = 0;
     while (message[i] != 0) {
-        offset = print_char(message[i++], col, row, WHITE_ON_BLACK);
+        offset = print_char(message[i++], col, row, colorData);
         /* Compute row/col for next iteration */
         row = get_offset_row(offset);
         col = get_offset_col(offset);
@@ -81,7 +83,11 @@ int print_char(char c, int col, int row, char attr) {
 
     if (c == '\n') {
         row = get_offset_row(offset);
-        offset = get_offset(0, row+1);
+        int col = get_offset_col(offset);
+        for (int i = col; i < 80; i++) {
+            print_char(' ', i, row, attr);
+        }
+        offset = get_cursor_offset();
     } else if (c == 0x08) { /* Backspace */
         vidmem[offset] = ' ';
         vidmem[offset+1] = attr;
@@ -101,7 +107,10 @@ int print_char(char c, int col, int row, char attr) {
 
         /* Blank last line */
         char *last_line = (char*) (get_offset(0, MAX_ROWS-1) + (u8*) VIDEO_ADDRESS);
-        for (i = 0; i < MAX_COLS * 2; i++) last_line[i] = 0;
+        for (i = 0; i < MAX_COLS; i++) {
+            last_line[i * 2] = 0;
+            last_line[i * 2 + 1] = attr;
+        }
 
         offset -= 2 * MAX_COLS;
     }

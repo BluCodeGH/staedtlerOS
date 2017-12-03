@@ -19,4 +19,6 @@ void kprint_at(char *message, int col, int row);
 void kprint(char *message);
 void kprint_backspace();
 
+unsigned char colorData;
+
 #endif

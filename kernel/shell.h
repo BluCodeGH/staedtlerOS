@@ -1,4 +1,4 @@
-void aaFunc();
+void echo();
 void bbFunc();
 void ccFunc();
 
